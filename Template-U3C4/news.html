@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css">
+    <title>Document</title>
+    <style>
+      #main{
+        margin: auto;
+      }
+      #content{
+        display: block;
+        color: rgba(0, 0, 0, 0.788)!important;
+        font-size: 17px!important;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--DO NOT CHANGE THIS ID's-->
+
+    <div id="container">
+      <div id="sidebar">
+        <!--add your sidebar component here-->
+      </div>
+
+      <div id="main">
+        <!--DO NOT CHANGE THIS ID's-->
+        <!--Show the clicked article in detailed format here ONLY-->
+      </div>
+    </div>
+  </body>
+  <script type="module">
+    
+      import {apiCall, appendArticles} from "./scripts/main.js";
+
+    import sidebar from "./components/sidebar.js";
+    let sidebar_div = document.querySelector("#sidebar");
+    sidebar_div.innerHTML = sidebar();
+
+
+      let click_news_arr = [];
+      let click_news = JSON.parse(localStorage.getItem("article"));
+      //console.log(click_news);
+
+      click_news_arr.push(click_news);
+      //console.log(click_news_arr)
+
+      let main = document.querySelector("#main")
+      appendArticles(click_news_arr, main);
+
+  </script>
+</html>

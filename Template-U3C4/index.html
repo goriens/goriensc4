@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+      #main{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        background-color: black;
+        color: #fff;
+        border-radius: 10px;
+      }
+    </style>
+    <title>Home</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="sidebar">
+        <!--DO NOT CHANGE THIS ID's-->
+        <!--Append the horizontal navbar(sidebar) here only-->
+        <!--<h1>Sidebar</h1>
+        <div>Login</div>
+        <input type="search" id="searchbar">
+        <div>StartUp</div>
+        <div>News Letter</div>
+        <div>Audio</div>
+        <div>Video</div>-->
+      </div>
+
+      <div id="main">
+        <!--DO NOT CHANGE THIS ID's-->
+        <!--Append top headlines from india here only-->
+        <!--<h1>test</h1>-->
+      </div>
+    </div>
+  </body>
+  <script type="module">
+    import sidebar from "./components/sidebar.js";
+    import {apiCall, appendArticles} from "./scripts/main.js";
+    let sidebar_div = document.querySelector("#sidebar");
+    sidebar_div.innerHTML = sidebar();
+
+
+
+    ///data
+    let url = "https://shrouded-earth-23381.herokuapp.com/api/headlines/india";
+    let article_data = await apiCall(url);
+    //console.log(article_data);
+
+    let main = document.querySelector("#main");
+    appendArticles(article_data, main);
+
+
+    let input = document.querySelector("#searchbar");
+    input.addEventListener("keypress", (e) =>{
+    if(e.key == "Enter"){
+      let input_value = document.querySelector("#searchbar").value;
+      localStorage.setItem("search_term", input_value);
+      window.location.href = "search.html";
+    }
+  });
+  </script>
+</html>
